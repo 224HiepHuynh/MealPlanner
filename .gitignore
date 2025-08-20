@@ -416,3 +416,76 @@ FodyWeavers.xsd
 *.msix
 *.msm
 *.msp
+
+
+# --- OS / General ---
+.DS_Store
+Thumbs.db
+*.log
+*.tmp
+*.swp
+*.swo
+
+# --- IDEs ---
+# VS Code
+.vscode/
+
+# IntelliJ / JetBrains
+.idea/
+*.iml
+
+# Eclipse
+.project
+.classpath
+.settings/
+
+# --- Build outputs ---
+/target/
+/build/
+/out/
+
+# --- Java specific ---
+*.class
+*.jar
+*.war
+*.ear
+
+# --- Spring Boot / Maven / Gradle ---
+.mvn/
+.mvn/wrapper/maven-wrapper.jar
+.gradle/
+!gradle-wrapper.jar
+
+# --- Config / Secrets ---
+*.env
+*.key
+*.pem
+*.crt
+*.p12
+*.jks
+
+# --- Data / Local DBs ---
+*.db
+*.sqlite
+*.h2.db
+
+# --- YAML/XML (if auto-generated or local only) ---
+*.xml
+*.yaml
+*.yml
+
+# --- Python (if you mix Python tooling/scripts) ---
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.venv/
+env/
+venv/
+
+# --- Node (if using React/Node front-end) ---
+node_modules/
+npm-debug.log
+yarn-debug.log
+yarn-error.log
+
