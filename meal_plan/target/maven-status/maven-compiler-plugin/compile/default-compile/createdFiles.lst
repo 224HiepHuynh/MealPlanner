@@ -1,0 +1,10 @@
+com/job/meal_plan/model/Food.class
+com/job/meal_plan/model/DayPlan.class
+com/job/meal_plan/model/Meal.class
+com/job/meal_plan/model/Meal$MealBuilder.class
+com/job/meal_plan/model/User.class
+com/job/meal_plan/model/DayPlan$DayPlanBuilder.class
+com/job/meal_plan/MealPlanApplication.class
+com/job/meal_plan/config/AppConfig.class
+com/job/meal_plan/model/MealFood.class
+com/job/meal_plan/model/Food$FoodBuilder.class
