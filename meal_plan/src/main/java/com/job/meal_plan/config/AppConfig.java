@@ -10,7 +10,7 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class AppConfig {
 
-        @Bean
+    @Bean
     public DataSource dataSource(
         @Value("${spring.datasource.url}") String url,
         @Value("${spring.datasource.driver-class-name}") String driverClassName,
