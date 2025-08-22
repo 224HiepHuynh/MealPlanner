@@ -1,4 +1,5 @@
 com/job/meal_plan/model/Food.class
+com/job/meal_plan/model/DTO/DayPlanDto.class
 com/job/meal_plan/model/DayPlan.class
 com/job/meal_plan/model/Meal.class
 com/job/meal_plan/model/Meal$MealBuilder.class
