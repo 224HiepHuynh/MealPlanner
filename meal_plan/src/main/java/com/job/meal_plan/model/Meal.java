@@ -1,6 +1,6 @@
 package com.job.meal_plan.model;
 
-import java.util.List;
+import java.util.Set;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -32,10 +32,23 @@ public class Meal {
 
   
     @OneToMany(mappedBy="meal", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<MealFood> foodList;
+    private Set<MealFood> foodList;
 
-   @ManyToOne
-   @JoinColumn(name="user_id")
+    @ManyToOne
+    @JoinColumn(name="user_id")
     private User user;
+
+    @Override
+    public int hashCode(){
+        return id != null ? id.hashCode() : 0;
+    }
+
+    @Override
+    public boolean equals(Object o){
+        if(this ==o) return true;
+        if(!(o instanceof Meal)) return false;
+        Meal meal= (Meal) o;
+        return id!=null && id.equals(meal.getId());
+    }
 }
 

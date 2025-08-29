@@ -1,6 +1,6 @@
 package com.job.meal_plan.model.dto;
 
-import java.util.List;
+import java.util.*;
 
 import lombok.*;
 
@@ -17,7 +17,7 @@ public class UserDto {
 
     private String pwd;
 
-    private List<Long> mealIds;
+    private Set<Long> mealIds;
 
-    private List<Long> dayPlanIds;
+    private Set<Long> dayPlanIds;
 }

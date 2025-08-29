@@ -1,8 +1,7 @@
 package com.job.meal_plan.model;
-import java.util.List;
+import java.util.Set;
 
 import jakarta.persistence.*;
-import jakarta.persistence.GeneratedValue;
 import lombok.*;
 
 
@@ -27,8 +26,19 @@ public class Food {
 
     
     @OneToMany(mappedBy="food")
-    private List<MealFood> mealFood;
+    private Set<MealFood> mealFood;
 
+    @Override
+    public int hashCode(){
+        return id != null ? id.hashCode() : 0;
+    } 
 
+    @Override
+    public boolean equals(Object o){
+        if(this==o) return true;
+        if(!(o instanceof Food)) return false;
+        Food food= (Food) o;
+        return id!=null && id.equals(food.getId());
+    }
 }
 
