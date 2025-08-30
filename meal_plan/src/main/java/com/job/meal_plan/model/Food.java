@@ -26,7 +26,7 @@ public class Food {
 
     
     @OneToMany(mappedBy="food")
-    private Set<MealFood> mealFood;
+    private Set<MealFood> mealFoods;
 
     @Override
     public int hashCode(){

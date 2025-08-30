@@ -1,10 +1,10 @@
 package com.job.meal_plan.model.mapper;
 
-import java.util.List;
 import java.util.Set;
-import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
+import com.job.meal_plan.model.DayPlan;
+import com.job.meal_plan.model.Meal;
 import com.job.meal_plan.model.User;
 import com.job.meal_plan.model.dto.UserDto;
 
@@ -15,12 +15,12 @@ public class UserMapper {
             .firstName(user.getFirstName())
             .lastName(user.getLastName())
             .email(user.getEmail())
-            .mealIds( user.getMeals() ==null? Set.of():
+            .meals( user.getMeals() ==null? Set.of():
                 user.getMeals().stream()
                 .map(m -> m.getId())
                 .collect(Collectors.toSet())
                 )
-            .dayPlanIds( user.getDayPlans()==null?Set.of():
+            .dayPlans( user.getDayPlans()==null?Set.of():
                 user.getDayPlans().stream()
                 .map(p->p.getId())
                 .collect(Collectors.toSet())
@@ -36,11 +36,15 @@ public class UserMapper {
                 .firstName(userDto.getFirstName())
                 .lastName(userDto.getLastName())
                 .email(userDto.getEmail())
-                .meals(userDto.getMealIds().stream()
-                    .map(id->new Meal(id))
+                .pwd(userDto.getPwd())
+                .meals(userDto.getMeals()==null?Set.of(): userDto.getMeals().stream()
+                    .map(id->Meal.builder().id(id).build())
                     .collect(Collectors.toSet()))
-                .
-                
+                .dayPlans(userDto.getDayPlans()==null?Set.of():userDto.getDayPlans().stream()
+                    .map(id-> DayPlan.builder().id(id).build())
+                    .collect(Collectors.toSet())    
+                )
+                .build();
     }
     
 }

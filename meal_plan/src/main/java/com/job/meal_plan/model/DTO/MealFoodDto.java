@@ -1,17 +1,20 @@
 package com.job.meal_plan.model.dto;
 
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+
 import lombok.*;
 
 @Builder
 @Data
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class MealFoodDto {
 
     private Long id;
 
-    private MealDto meal;
+    private Long meal;
 
-    private FoodDto food;
+    private Long food;
     private Integer grams;
     
     

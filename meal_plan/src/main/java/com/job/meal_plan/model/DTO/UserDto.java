@@ -2,11 +2,14 @@ package com.job.meal_plan.model.dto;
 
 import java.util.*;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+
 import lombok.*;
 
 
 @Builder
 @Data
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class UserDto {
     
     private String firstName;
@@ -17,7 +20,7 @@ public class UserDto {
 
     private String pwd;
 
-    private Set<Long> mealIds;
+    private Set<Long> meals;
 
-    private Set<Long> dayPlanIds;
+    private Set<Long> dayPlans;
 }

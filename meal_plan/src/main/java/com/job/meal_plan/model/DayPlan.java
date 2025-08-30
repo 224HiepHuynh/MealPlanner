@@ -13,7 +13,7 @@ import lombok.*;
 @Entity
 public class DayPlan {
     
-
+    
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -27,6 +27,7 @@ public class DayPlan {
     @Transient
     private Integer totalDayCalories;
 
+    private String planName;
     
     @ManyToMany
     @JoinTable(
