@@ -26,6 +26,7 @@ public class Food {
 
     
     @OneToMany(mappedBy="food")
+    @EqualsAndHashCode.Exclude
     private Set<MealFood> mealFoods;
 
     @Override

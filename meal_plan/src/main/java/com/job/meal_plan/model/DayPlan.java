@@ -35,11 +35,13 @@ public class DayPlan {
         joinColumns=@JoinColumn(name="Day_plan_id"),
         inverseJoinColumns=@JoinColumn(name="meal_id")
     )
+    @EqualsAndHashCode.Exclude
     private Set<Meal> meals;
     
 
     @ManyToOne
     @JoinColumn(name="user_id")
+    @EqualsAndHashCode.Exclude
     private User user;
 
 

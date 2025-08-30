@@ -6,15 +6,16 @@ import java.util.stream.Collectors;
 import com.job.meal_plan.model.DayPlan;
 import com.job.meal_plan.model.Meal;
 import com.job.meal_plan.model.User;
-import com.job.meal_plan.model.dto.DayPlanDto;
+import com.job.meal_plan.model.dto.response.DayPlanResponseDto;
+
 
 public class DayPlanMapper {
 
 
 
 
-    public static DayPlanDto toDto(DayPlan dayPlan){
-        return DayPlanDto.builder()
+    public static DayPlanResponseDto toResponseDto(DayPlan dayPlan){
+        return DayPlanResponseDto.builder()
                 .id(dayPlan.getId())
                 .meals(
                     dayPlan.getMeals()==null?null: dayPlan.getMeals().stream()
@@ -26,17 +27,17 @@ public class DayPlanMapper {
                 
     }
 
-    public static DayPlan toDayPlan(DayPlanDto dayPlanDto){
+    public static DayPlan toDayPlan(DayPlanResponseDto dayPlanResponseDto){
         return DayPlan.builder()
-                .id(dayPlanDto.getId())
+                .id(dayPlanResponseDto.getId())
                 .user(User.builder().
-                    email(dayPlanDto.getUserEmail())
+                    email(dayPlanResponseDto.getUserEmail())
                     .build())
                 .meals(
-                   dayPlanDto.getMeals()==null?Set.of():dayPlanDto.getMeals().stream()
+                   dayPlanResponseDto.getMeals()==null?Set.of():dayPlanResponseDto.getMeals().stream()
                    .map(id->Meal.builder().id(id).build())
                    .collect(Collectors.toSet()))
-                .planName(dayPlanDto.getPlanName())
+                .planName(dayPlanResponseDto.getPlanName())
                 .build();
     }
 

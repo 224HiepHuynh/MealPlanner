@@ -6,6 +6,7 @@ import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 @Data
@@ -32,10 +33,12 @@ public class Meal {
 
   
     @OneToMany(mappedBy="meal", cascade = CascadeType.ALL, orphanRemoval = true)
+    @EqualsAndHashCode.Exclude
     private Set<MealFood> foodList;
 
     @ManyToOne
     @JoinColumn(name="user_id")
+    @EqualsAndHashCode.Exclude
     private User user;
 
     @Override
