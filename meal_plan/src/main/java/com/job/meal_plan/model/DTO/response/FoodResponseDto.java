@@ -9,7 +9,7 @@ import lombok.*;
 @Builder
 @Data
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class FoodDto {
+public class FoodResponseDto {
     private Long id;
     private String name;
     private Integer protein;

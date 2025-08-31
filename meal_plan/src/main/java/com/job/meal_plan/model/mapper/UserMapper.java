@@ -6,12 +6,13 @@ import java.util.stream.Collectors;
 import com.job.meal_plan.model.DayPlan;
 import com.job.meal_plan.model.Meal;
 import com.job.meal_plan.model.User;
-import com.job.meal_plan.model.dto.UserDto;
+import com.job.meal_plan.model.dto.request.UserRequestDto;
+import com.job.meal_plan.model.dto.response.UserResponseDto;
 
 public class UserMapper {
 
-    public static UserDto toDto(User user){
-       return UserDto.builder()
+    public static UserResponseDto toResponseDto(User user){
+       return UserResponseDto.builder()
             .firstName(user.getFirstName())
             .lastName(user.getLastName())
             .email(user.getEmail())
@@ -31,20 +32,15 @@ public class UserMapper {
 
 
 
-    public static User toUser(UserDto userDto){
+    public static User toUser(UserRequestDto userRequestDto){
         return User.builder()
-                .firstName(userDto.getFirstName())
-                .lastName(userDto.getLastName())
-                .email(userDto.getEmail())
-                .pwd(userDto.getPwd())
-                .meals(userDto.getMeals()==null?Set.of(): userDto.getMeals().stream()
-                    .map(id->Meal.builder().id(id).build())
-                    .collect(Collectors.toSet()))
-                .dayPlans(userDto.getDayPlans()==null?Set.of():userDto.getDayPlans().stream()
-                    .map(id-> DayPlan.builder().id(id).build())
-                    .collect(Collectors.toSet())    
-                )
+                .firstName(userRequestDto.getFirstName())
+                .lastName(userRequestDto.getLastName())
+                .email(userRequestDto.getEmail())
+                .pwd(userRequestDto.getPwd())
                 .build();
     }
     
+
+
 }

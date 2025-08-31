@@ -1,16 +1,17 @@
 package com.job.meal_plan.model.mapper;
 
+import java.util.Set;
 import java.util.stream.Collectors;
 
 import com.job.meal_plan.model.Food;
-import com.job.meal_plan.model.MealFood;
-import com.job.meal_plan.model.dto.FoodDto;
+import com.job.meal_plan.model.dto.FoodResponseDto;
+import com.job.meal_plan.model.dto.request.FoodRequestDto;
 
 public class FoodMapper {
     
 
-    public static FoodDto toDto(Food food){
-        return FoodDto.builder()
+    public static FoodResponseDto toResponseDto(Food food){
+        return FoodResponseDto.builder()
                 .id(food.getId())
                 .calories(food.getCalories())
                 .carbs(food.getCarbs())
@@ -23,17 +24,14 @@ public class FoodMapper {
                 .build();
     }
 
-    public static Food toFood(FoodDto foodDto){
+    public static Food toFood(FoodRequestDto foodDto){
         return Food.builder()
-                .id(foodDto.getId())
                 .calories(foodDto.getCalories())
                 .carbs(foodDto.getCarbs())
                 .fats(foodDto.getFats())
                 .name(foodDto.getName())
                 .protein(foodDto.getProtein())
-                .mealFoods(foodDto.getMealFoods()==null?null:foodDto.getMealFoods().stream()
-                    .map(id->MealFood.builder().id(id).build())
-                    .collect(Collectors.toSet()))
+                .mealFoods(Set.of())
                 .build();
 
     }

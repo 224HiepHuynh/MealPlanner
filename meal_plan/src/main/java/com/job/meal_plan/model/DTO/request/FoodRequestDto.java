@@ -11,6 +11,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class FoodRequestDto {
     
+    private Long id;
     private String name;
     private Integer protein;
     private Integer carbs;

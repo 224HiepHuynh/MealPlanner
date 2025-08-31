@@ -1,7 +1,5 @@
 package com.job.meal_plan.model.dto.request;
 
-import java.util.List;
-
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -11,10 +9,12 @@ import lombok.NoArgsConstructor;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class MealRequestDto {
-    
-    private Long id;
-    private String mealName;
-    private List<FoodRequestDto> foodList;
+public class UserRequestDto {
 
+
+    private String firstName;
+    private String lastName; 
+    private String email;
+    private String pwd;
+    
 }

@@ -10,15 +10,13 @@ import lombok.*;
 @Builder
 @Data
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class UserDto {
+public class UserResponseDto {
     
     private String firstName;
 
     private String lastName;
 
     private String email;
-
-    private String pwd;
 
     private Set<Long> meals;
 

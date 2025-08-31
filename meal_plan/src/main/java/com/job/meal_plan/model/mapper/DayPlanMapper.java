@@ -4,8 +4,8 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 import com.job.meal_plan.model.DayPlan;
-import com.job.meal_plan.model.Meal;
 import com.job.meal_plan.model.User;
+import com.job.meal_plan.model.dto.request.DayPlanRequestDto;
 import com.job.meal_plan.model.dto.response.DayPlanResponseDto;
 
 
@@ -27,17 +27,13 @@ public class DayPlanMapper {
                 
     }
 
-    public static DayPlan toDayPlan(DayPlanResponseDto dayPlanResponseDto){
+    public static DayPlan toDayPlan(DayPlanRequestDto dayPlanRequestDto){
         return DayPlan.builder()
-                .id(dayPlanResponseDto.getId())
                 .user(User.builder().
-                    email(dayPlanResponseDto.getUserEmail())
+                    email(dayPlanRequestDto.getUserEmail())
                     .build())
-                .meals(
-                   dayPlanResponseDto.getMeals()==null?Set.of():dayPlanResponseDto.getMeals().stream()
-                   .map(id->Meal.builder().id(id).build())
-                   .collect(Collectors.toSet()))
-                .planName(dayPlanResponseDto.getPlanName())
+                .meals(Set.of())
+                .planName(dayPlanRequestDto.getPlanName())
                 .build();
     }
 
