@@ -1,6 +1,6 @@
 package com.job.meal_plan.model.dto.request;
 
-import java.util.List;
+import java.util.Set;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -15,6 +15,6 @@ public class MealRequestDto {
     
     private Long id;
     private String mealName;
-    private List<FoodRequestDto> foodList;
+    private Set<FoodRequestDto> foodList;
 
 }

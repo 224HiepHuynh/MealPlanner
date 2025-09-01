@@ -9,4 +9,5 @@ import com.job.meal_plan.model.Food;
 
 public interface DayPlanRepository extends JpaRepository<DayPlan,Long>{
     Set<Food> findByDayPlanNameContaining(String keyword);
+    Set<DayPlan> findByUserEmail(String email);
 }

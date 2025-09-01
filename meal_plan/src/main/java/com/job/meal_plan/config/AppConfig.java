@@ -24,5 +24,13 @@ public class AppConfig {
                 .password(password)
                 .build();
     }
+
+    // @Bean
+    // public UsdaConfig UsdaConfig(
+    //     @Value("${app.usda.api.key}") String key
+
+    // ){
+        
+    // }
 }
 

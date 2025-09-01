@@ -1,4 +1,4 @@
-package com.job.meal_plan.model.dto;
+package com.job.meal_plan.model.dto.response;
 
 import java.util.Set;
 
@@ -15,6 +15,5 @@ public class FoodResponseDto {
     private Integer protein;
     private Integer carbs;
     private Integer fats;
-    private Integer calories; 
-    private Set<Long> mealFoods;
+    private Integer calories;
 }

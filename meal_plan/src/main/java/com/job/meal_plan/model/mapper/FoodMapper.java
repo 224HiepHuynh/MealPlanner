@@ -1,11 +1,10 @@
 package com.job.meal_plan.model.mapper;
 
 import java.util.Set;
-import java.util.stream.Collectors;
 
 import com.job.meal_plan.model.Food;
-import com.job.meal_plan.model.dto.FoodResponseDto;
 import com.job.meal_plan.model.dto.request.FoodRequestDto;
+import com.job.meal_plan.model.dto.response.FoodResponseDto;
 
 public class FoodMapper {
     
@@ -18,9 +17,6 @@ public class FoodMapper {
                 .fats(food.getFats())
                 .name(food.getName())
                 .protein(food.getProtein())
-                .mealFoods(food.getMealFoods()==null?null:food.getMealFoods().stream()
-                    .map(f->f.getId())
-                    .collect(Collectors.toSet()))
                 .build();
     }
 
@@ -35,4 +31,13 @@ public class FoodMapper {
                 .build();
 
     }
+
+
+    // public static MealFood toMealFood(FoodRequestDto foodRequestDto, MealRequestDto mealRequestDto  ){
+    //     return MealFood.builder()
+    //             .id(null)
+    //             .meal(null)
+    // }
+
+    
 }
