@@ -1,5 +1,6 @@
 package com.job.meal_plan.model.mapper;
 
+import java.util.HashSet;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -46,7 +47,7 @@ public class DayPlanMapper {
         return DayPlanResponseDto.builder()
                 .id(dayPlan.getId())
                 .meals(
-                    dayPlan.getMeals()==null?Set.of(): dayPlan.getMeals().stream()
+                    dayPlan.getMeals()==null?new HashSet<>(): dayPlan.getMeals().stream()
                     .map(Meal::getId)
                     .collect(Collectors.toSet()))
                 .userEmail(dayPlan.getUser()==null? null:dayPlan.getUser().getEmail())

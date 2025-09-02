@@ -16,5 +16,6 @@ public class MealRequestDto {
     private Long id;
     private String mealName;
     private Set<FoodRequestDto> foodList;
+    private String userEmail;
 
 }

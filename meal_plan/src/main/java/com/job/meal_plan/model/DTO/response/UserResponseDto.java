@@ -1,4 +1,4 @@
-package com.job.meal_plan.model.dto;
+package com.job.meal_plan.model.dto.response;
 
 import java.util.*;
 
@@ -9,6 +9,8 @@ import lombok.*;
 
 @Builder
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class UserResponseDto {
     

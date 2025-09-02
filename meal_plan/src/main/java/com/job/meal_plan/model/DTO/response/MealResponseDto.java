@@ -8,6 +8,8 @@ import lombok.*;
 
 @Builder
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class MealResponseDto {
     

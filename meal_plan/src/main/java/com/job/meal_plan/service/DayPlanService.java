@@ -23,6 +23,7 @@ import com.job.meal_plan.model.mapper.DayPlanMapper;
 import com.job.meal_plan.model.mapper.MealMapper;
 import com.job.meal_plan.repository.DayPlanRepository;
 
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 
 @Service
@@ -49,14 +50,21 @@ public class DayPlanService {
 
         dayPlanRequestDto.setId(Id);
 
-        return DayPlanMapper.toResponseDto(
+        return DayPlanMapper.toDetailedResponseDto(
             dayPlanRepository.save(DayPlanMapper.toDayPlan(dayPlanRequestDto))
             );
 
     }
 
-    
+    @Transactional
     public DayPlanDetailedResponseDto createDayPlan(DayPlanRequestDto thePlan) throws Exception{
+        
+        Set<MealRequestDto> mealRequests= thePlan.getMeals();
+        boolean sameUser=true;
+        for(MealRequestDto m: mealRequests){
+            sameUser=m.getUserEmail().equals(thePlan.getUserEmail());
+        }
+        if(!sameUser) throw new Exception("bad request: userId");
 
         DayPlan dp= DayPlanMapper.toDayPlan(thePlan); //DayPlan Obj w/Meals that has empty FoodList
 
@@ -64,17 +72,18 @@ public class DayPlanService {
             .flatMap(mealRequestDtos->mealRequestDtos.getFoodList().stream())
             .map(FoodRequestDto::getId)
             .collect(Collectors.toSet());
-        
         Map<Long, Food> foodMap = foodService.findAllById(allFoodIds).stream()
             .collect(Collectors.toMap(Food::getId, f->f));
 
         if(foodMap.size()!=allFoodIds.size()){throw new Exception("Some Foods don't exist");}
 
-        Set<MealRequestDto> mealRequests= thePlan.getMeals();
+       
 
         Map<MealRequestDto,Meal> mealMap= 
             mealRequests.stream()
             .collect(Collectors.toMap(mr->mr,MealMapper::toMeal));
+      
+       
         mealService.saveAll(mealMap.values()); 
         for(MealRequestDto mr: mealMap.keySet()){
             Meal meal=mealMap.get(mr);

@@ -10,7 +10,7 @@ import com.job.meal_plan.model.Food;
 @Repository
 public interface FoodRepository extends JpaRepository<Food,Long> {
     
-    Set<Food> findByFoodName(String foodName);
+    Set<Food> findByName(String foodName);
 
-    Set<Food> findByFoodNameContaining(String keyword);
+    Set<Food> findByNameContaining(String keyword);
 }

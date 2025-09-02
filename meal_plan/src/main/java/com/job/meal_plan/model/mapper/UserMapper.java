@@ -1,5 +1,6 @@
 package com.job.meal_plan.model.mapper;
 
+import java.util.HashSet;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -16,12 +17,12 @@ public class UserMapper {
             .firstName(user.getFirstName())
             .lastName(user.getLastName())
             .email(user.getEmail())
-            .meals( user.getMeals() ==null? Set.of():
+            .meals( user.getMeals() ==null? new HashSet<>():
                 user.getMeals().stream()
                 .map(m -> m.getId())
                 .collect(Collectors.toSet())
                 )
-            .dayPlans( user.getDayPlans()==null?Set.of():
+            .dayPlans( user.getDayPlans()==null?new HashSet<>():
                 user.getDayPlans().stream()
                 .map(p->p.getId())
                 .collect(Collectors.toSet())

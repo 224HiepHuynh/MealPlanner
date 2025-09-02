@@ -1,0 +1,4 @@
+-------------------------------------------------------------------------------
+Test set: com.job.meal_plan.MealPlanApplicationTests
+-------------------------------------------------------------------------------
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 9.745 s -- in com.job.meal_plan.MealPlanApplicationTests
