@@ -20,9 +20,12 @@ public class MealFood {
     private Meal meal;
 
     @ManyToOne
-    @JoinColumn(name="food_id")
+    @JoinColumn(name="food_id", nullable = true)
     @EqualsAndHashCode.Exclude
     private Food food;
+
+    private Long usdaId;
+
     private Integer grams;
 
 

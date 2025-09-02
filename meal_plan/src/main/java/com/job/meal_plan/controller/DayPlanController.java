@@ -40,11 +40,10 @@ public class DayPlanController {
         return ResponseEntity.ok(res);
     }
 
-    @PutMapping("/put/{id}")
+    @PutMapping("/put")
     public ResponseEntity<DayPlanDetailedResponseDto> updatePlan(
-        @PathVariable Long Id,
         @RequestBody DayPlanRequestDto thePlan){
-            return ResponseEntity.ok(dayPlanService.updatePlan(Id, thePlan));
+            return ResponseEntity.ok(dayPlanService.updatePlan(thePlan));
     }
 
 

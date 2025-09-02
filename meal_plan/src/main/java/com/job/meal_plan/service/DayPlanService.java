@@ -23,6 +23,7 @@ import com.job.meal_plan.model.mapper.DayPlanMapper;
 import com.job.meal_plan.model.mapper.MealMapper;
 import com.job.meal_plan.repository.DayPlanRepository;
 
+import jakarta.persistence.EntityNotFoundException;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 
@@ -45,14 +46,21 @@ public class DayPlanService {
 
     }
 
+    @Transactional
+    public DayPlanDetailedResponseDto updatePlan(DayPlanRequestDto dayPlanRequestDto){
 
-    public DayPlanDetailedResponseDto updatePlan(Long Id,DayPlanRequestDto dayPlanRequestDto){
+        DayPlan plan = dayPlanRepository.findById(dayPlanRequestDto.getId())
+        .orElseThrow(() -> new EntityNotFoundException("DayPlan not found with id " + dayPlanRequestDto.getId()));
 
-        dayPlanRequestDto.setId(Id);
+        Set<Meal> m=plan.getMeals();
+        
+
 
         return DayPlanMapper.toDetailedResponseDto(
             dayPlanRepository.save(DayPlanMapper.toDayPlan(dayPlanRequestDto))
             );
+
+
 
     }
 
@@ -77,13 +85,11 @@ public class DayPlanService {
 
         if(foodMap.size()!=allFoodIds.size()){throw new Exception("Some Foods don't exist");}
 
-       
 
         Map<MealRequestDto,Meal> mealMap= 
             mealRequests.stream()
             .collect(Collectors.toMap(mr->mr,MealMapper::toMeal));
-      
-       
+    
         mealService.saveAll(mealMap.values()); 
         for(MealRequestDto mr: mealMap.keySet()){
             Meal meal=mealMap.get(mr);

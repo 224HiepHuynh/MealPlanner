@@ -31,6 +31,9 @@ public class Meal {
     @Transient
     private Integer totalCalories;
 
+    @ManyToOne
+    @JoinColumn(name="day_plan_id")
+    private DayPlan dayPlan;
   
     @OneToMany(mappedBy="meal", cascade = CascadeType.ALL, orphanRemoval = true)
     @EqualsAndHashCode.Exclude

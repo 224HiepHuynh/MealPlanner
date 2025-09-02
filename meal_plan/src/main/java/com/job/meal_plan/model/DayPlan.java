@@ -29,12 +29,7 @@ public class DayPlan {
 
     private String planName;
     
-    @ManyToMany
-    @JoinTable(
-        name="Day_plan_meal",
-        joinColumns=@JoinColumn(name="Day_plan_id"),
-        inverseJoinColumns=@JoinColumn(name="meal_id")
-    )
+    @OneToMany(mappedBy="dayPlan", cascade = CascadeType.ALL, orphanRemoval = true)
     @EqualsAndHashCode.Exclude
     private Set<Meal> meals;
     
