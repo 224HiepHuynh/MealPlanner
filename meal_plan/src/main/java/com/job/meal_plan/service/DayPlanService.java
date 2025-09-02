@@ -80,9 +80,11 @@ public class DayPlanService {
             .flatMap(mealRequestDtos->mealRequestDtos.getFoodList().stream())
             .map(FoodRequestDto::getId)
             .collect(Collectors.toSet());
+
         Map<Long, Food> foodMap = foodService.findAllById(allFoodIds).stream()
             .collect(Collectors.toMap(Food::getId, f->f));
-
+        
+        
         if(foodMap.size()!=allFoodIds.size()){throw new Exception("Some Foods don't exist");}
 
 

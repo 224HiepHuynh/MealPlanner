@@ -1,5 +1,6 @@
 package com.job.meal_plan.model;
 
+import java.util.HashSet;
 import java.util.Set;
 
 import jakarta.persistence.*;
@@ -39,6 +40,28 @@ public class DayPlan {
     @EqualsAndHashCode.Exclude
     private User user;
 
+
+    public void addMeal(Meal meal){
+        meals.add(meal);
+        meal.setDayPlan(this);
+    }
+    
+    
+    public void setMeals(Set<Meal> newMeals){
+        if(newMeals==null){
+            meals=new HashSet<>();
+            return;
+        }
+        for(Meal nm:newMeals){
+            nm.setDayPlan(this);
+        }
+        this.meals=newMeals;
+    }
+
+    public void removeMeal(Meal meal) {
+        meals.remove(meal);
+        meal.setDayPlan(null);
+    }
 
     @Override
     public int hashCode(){
