@@ -1,12 +1,12 @@
 package com.job.meal_plan.model.mapper;
 
 import java.util.HashSet;
-import java.util.Set;
 import java.util.stream.Collectors;
 
 import com.job.meal_plan.model.Meal;
 import com.job.meal_plan.model.User;
 import com.job.meal_plan.model.dto.request.MealRequestDto;
+import com.job.meal_plan.model.dto.response.FoodResponseDto;
 import com.job.meal_plan.model.dto.response.MealInPlanResponseDTO;
 import com.job.meal_plan.model.dto.response.MealResponseDto;
 
@@ -41,7 +41,18 @@ public class MealMapper {
                 .id(meal.getId())
                 .mealName(meal.getMealName())
                 .mealFoods( meal.getFoodList()== null?new HashSet<>():meal.getFoodList().stream()
-                    .map(mf->FoodMapper.toResponseDto(mf.getFood()))
+                    .map(mf->
+                        {
+                         if (mf.getFood() != null) {
+                            return FoodMapper.toResponseDto(mf.getFood());
+                         }
+                        else if(mf.getUsdaId()!=null){
+                            return FoodResponseDto.builder()
+                                .id(mf.getUsdaId())
+                                .build();
+                        }
+                        else return null;
+                    })
                     .collect(Collectors.toSet()))
                 .build();
     }

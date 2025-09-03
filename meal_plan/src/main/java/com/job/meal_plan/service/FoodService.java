@@ -1,13 +1,16 @@
 package com.job.meal_plan.service;
 
+import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import com.job.meal_plan.client.UsdaClient;
-import com.job.meal_plan.client.dto.UsdaFoodDto;
+import com.job.meal_plan.client.dto.UsdaSRLegacyFoodDto;
 import com.job.meal_plan.model.Food;
 import com.job.meal_plan.model.dto.response.FoodResponseDto;
 import com.job.meal_plan.model.mapper.FoodMapper;
@@ -36,9 +39,23 @@ public class FoodService {
 
 
     public FoodResponseDto findUsdafoodById(Long id){
-       ResponseEntity<UsdaFoodDto> uFoodDto= usdaClient.findUsdaFoodById(id);
+       ResponseEntity<UsdaSRLegacyFoodDto> uFoodDto= usdaClient.findUsdaFoodById(id);
         
        return FoodMapper.usdaFoodToFoodResponseDto(uFoodDto.getBody());
 
     }
+
+     public Set<FoodResponseDto> findAllByUsdaId(Set<Long> idList){
+        
+        ResponseEntity<UsdaSRLegacyFoodDto[]> response =usdaClient.findAllByUsdaId(idList);
+        UsdaSRLegacyFoodDto[] foods=response.getBody();
+        if (foods==null){
+            return new HashSet<>();
+        }
+        return Arrays.asList(foods).stream()
+            .map(FoodMapper::usdaFoodToFoodResponseDto)
+            .collect(Collectors.toSet());
+    }
+
 }
+

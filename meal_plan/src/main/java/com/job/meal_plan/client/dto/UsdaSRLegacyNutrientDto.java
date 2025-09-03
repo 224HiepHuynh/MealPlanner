@@ -1,7 +1,5 @@
 package com.job.meal_plan.client.dto;
 
-import java.util.List;
-
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -11,8 +9,9 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class UsdaFoodDto {
-    private Long fdcId;
-    private String description;
-    private List<UsdaNutrientDto> foodNutrients;
+public class UsdaSRLegacyNutrientDto {
+    private int number;
+    private String name;
+    private double amount;
+    private String unitName;
 }

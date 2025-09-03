@@ -5,8 +5,8 @@ import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-import com.job.meal_plan.client.dto.UsdaFoodDto;
-import com.job.meal_plan.client.dto.UsdaNutrientDto;
+import com.job.meal_plan.client.dto.UsdaSRLegacyFoodDto;
+import com.job.meal_plan.client.dto.UsdaSRLegacyNutrientDto;
 import com.job.meal_plan.model.Food;
 import com.job.meal_plan.model.dto.request.FoodRequestDto;
 import com.job.meal_plan.model.dto.response.FoodResponseDto;
@@ -15,6 +15,7 @@ public class FoodMapper {
     
 
     public static FoodResponseDto toResponseDto(Food food){
+        if(food==null) return null;
         return FoodResponseDto.builder()
                 .id(food.getId())
                 .kcal(food.getCalories())
@@ -26,6 +27,7 @@ public class FoodMapper {
     }
 
     public static Food toFood(FoodRequestDto foodDto){
+        if(foodDto==null) return null;
         return Food.builder()
                 .calories(foodDto.getCalories())
                 .carbs(foodDto.getCarbs())
@@ -38,8 +40,8 @@ public class FoodMapper {
     }
 
 
-    public static FoodResponseDto usdaFoodToFoodResponseDto(UsdaFoodDto usdaFoodDto){
-        Map<Integer, UsdaNutrientDto> nutrientMap= usdaFoodDto.getFoodNutrients().stream()
+    public static FoodResponseDto usdaFoodToFoodResponseDto(UsdaSRLegacyFoodDto usdaFoodDto){
+        Map<Integer, UsdaSRLegacyNutrientDto> nutrientMap= usdaFoodDto.getFoodNutrients().stream()
             .collect(Collectors.toMap(n->n.getNumber(), n->n));
         
         /*
