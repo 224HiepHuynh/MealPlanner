@@ -24,12 +24,19 @@ public class UsdaConfig {
     }
 
 
-    public String urlGetByNameContainning(String query){
-        String encodedQuery= URLEncoder.encode(query, StandardCharsets.UTF_8);
-        return String.format("%s/foods/search?query=%s&api_key=%s&format=%s", baseUrl,encodedQuery,key,format);
+    public String urlGetBySRLegacyNameContainning(String query){
+        /*
+         
+            curl -X 'GET' \
+            '%foods/search?query=%s&dataType=SR%20Legacy&pageSize=1&pageNumber=1&sortBy=fdcId&sortOrder=asc&api_key=%s' \
+            -H 'accept: application/json'
+         
+         */
+        // String encodedQuery= URLEncoder.encode(query, StandardCharsets.UTF_8);
+        return String.format("%s/foods/search?query=%s&dataType=SR Legacy&pageSize=10&pageNumber=0&sortBy=fdcId&sortOrder=asc&api_key=%s", baseUrl,query,key);
     }
 
-    public String urlGetAllByUsdaIds(Collection<?> idList){
+    public String urlGetAllBySRLegacyUsdaIds(Collection<?> idList){
 
         String paramList= idList.stream()
             .map(id->String.valueOf(id))
@@ -37,5 +44,7 @@ public class UsdaConfig {
 
         return String.format("%s/foods?fdcIds=%s&format=%s&nutrients=204&nutrients=205&nutrients=203&nutrients=208&api_key=%s", baseUrl,paramList,format,key);
     }
+
+    
 
 }

@@ -4,22 +4,18 @@ import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class UsdaSRLegacyFoodDto {
+public class UsdaSearchFoodsSRLegacyDto {
     private Long fdcId;
     private String description;
     private String dataType;
-    private List<UsdaSRLegacyNutrientDto> foodNutrients;
-
+    private List<UsdaSearchSRLegacyNutrientsDto> foodNutrients;
 
 
 }

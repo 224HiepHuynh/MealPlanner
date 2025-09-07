@@ -2,23 +2,20 @@ package com.job.meal_plan.client.dto;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
+
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class UsdaSRLegacyNutrientDto {
-    private int number;
-    private String name;
-    private double amount;
+public class UsdaSearchSRLegacyNutrientsDto {
+    private Integer nutrientId;
+    private String nutrientName;
+    private Integer nutrientNumber;
+    private double value;
     private String unitName;
-
-
     private String derivationCode;
     private String derivationDescription;
 }
