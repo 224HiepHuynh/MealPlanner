@@ -29,6 +29,13 @@ public class DayPlanController {
     
     private final DayPlanService dayPlanService;
 
+    @GetMapping("/{id}")
+    public ResponseEntity<DayPlanDetailedResponseDto> getMethodName(@RequestParam Long id) {
+        
+        return ResponseEntity.ok(dayPlanService.findById(id));
+    }
+    
+
     @GetMapping
     public ResponseEntity<Set<DayPlanResponseDto>> getAllDayPlansByUserId(
         @RequestParam("userId") String userId) {

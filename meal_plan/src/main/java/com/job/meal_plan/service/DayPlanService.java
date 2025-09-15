@@ -63,6 +63,14 @@ public class DayPlanService {
     }
 
     @Transactional
+    public DayPlanDetailedResponseDto findById(Long id){
+        return DayPlanMapper.toDetailedResponseDto(
+            dayPlanRepository.findById(id)
+            .orElseThrow(()-> new EntityNotFoundException("Doesn't Exist"))
+            );
+    }
+
+    @Transactional
     public DayPlanDetailedResponseDto createDayPlan(DayPlanRequestDto thePlan) throws Exception{
         
         Set<MealRequestDto> mealRequests= thePlan.getMeals();

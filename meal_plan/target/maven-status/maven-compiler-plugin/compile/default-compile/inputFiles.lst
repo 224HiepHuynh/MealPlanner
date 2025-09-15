@@ -2,6 +2,8 @@
 /Users/hiephuynh/Documents/apps/MealPlannerApp/MealPlanner/meal_plan/src/main/java/com/job/meal_plan/model/dto/request/MealRequestDto.java
 /Users/hiephuynh/Documents/apps/MealPlannerApp/MealPlanner/meal_plan/src/main/java/com/job/meal_plan/repository/UserRepository.java
 /Users/hiephuynh/Documents/apps/MealPlannerApp/MealPlanner/meal_plan/src/main/java/com/job/meal_plan/model/mapper/MealMapper.java
+/Users/hiephuynh/Documents/apps/MealPlannerApp/MealPlanner/meal_plan/src/main/java/com/job/meal_plan/client/dto/UsdaSearchFoodsSRLegacyDto.java
+/Users/hiephuynh/Documents/apps/MealPlannerApp/MealPlanner/meal_plan/src/main/java/com/job/meal_plan/client/dto/UsdaSearchFoodsDto.java
 /Users/hiephuynh/Documents/apps/MealPlannerApp/MealPlanner/meal_plan/src/main/java/com/job/meal_plan/service/UserService.java
 /Users/hiephuynh/Documents/apps/MealPlannerApp/MealPlanner/meal_plan/src/main/java/com/job/meal_plan/model/mapper/UserMapper.java
 /Users/hiephuynh/Documents/apps/MealPlannerApp/MealPlanner/meal_plan/src/main/java/com/job/meal_plan/model/MealFood.java
@@ -31,6 +33,7 @@
 /Users/hiephuynh/Documents/apps/MealPlannerApp/MealPlanner/meal_plan/src/main/java/com/job/meal_plan/client/dto/UsdaSRLegacyNutrientDto.java
 /Users/hiephuynh/Documents/apps/MealPlannerApp/MealPlanner/meal_plan/src/main/java/com/job/meal_plan/model/User.java
 /Users/hiephuynh/Documents/apps/MealPlannerApp/MealPlanner/meal_plan/src/main/java/com/job/meal_plan/repository/FoodRepository.java
+/Users/hiephuynh/Documents/apps/MealPlannerApp/MealPlanner/meal_plan/src/main/java/com/job/meal_plan/client/dto/UsdaSearchSRLegacyNutrientsDto.java
 /Users/hiephuynh/Documents/apps/MealPlannerApp/MealPlanner/meal_plan/src/main/java/com/job/meal_plan/model/mapper/FoodMapper.java
 /Users/hiephuynh/Documents/apps/MealPlannerApp/MealPlanner/meal_plan/src/main/java/com/job/meal_plan/service/FoodService.java
 /Users/hiephuynh/Documents/apps/MealPlannerApp/MealPlanner/meal_plan/src/main/java/com/job/meal_plan/repository/DayPlanRepository.java
