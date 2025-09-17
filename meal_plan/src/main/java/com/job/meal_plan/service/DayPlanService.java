@@ -3,6 +3,7 @@ package com.job.meal_plan.service;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
+import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Service;
@@ -18,6 +19,7 @@ import com.job.meal_plan.model.dto.response.DayPlanDetailedResponseDto;
 import com.job.meal_plan.model.dto.response.DayPlanResponseDto;
 import com.job.meal_plan.model.dto.response.FoodResponseDto;
 import com.job.meal_plan.model.mapper.DayPlanMapper;
+import com.job.meal_plan.model.mapper.FoodMapper;
 import com.job.meal_plan.model.mapper.MealMapper;
 import com.job.meal_plan.repository.DayPlanRepository;
 
@@ -37,6 +39,7 @@ public class DayPlanService {
         
         
         Set<DayPlan> dayplans= dayPlanRepository.findByUserEmail(userId);
+        
         return dayplans.stream()
                 .map(dp-> DayPlanMapper.toResponseDto(dp))
                 .collect(Collectors.toSet());
@@ -64,10 +67,31 @@ public class DayPlanService {
 
     @Transactional
     public DayPlanDetailedResponseDto findById(Long id){
-        return DayPlanMapper.toDetailedResponseDto(
-            dayPlanRepository.findById(id)
-            .orElseThrow(()-> new EntityNotFoundException("Doesn't Exist"))
-            );
+
+        DayPlan dayPlan= dayPlanRepository.findById(id).orElseThrow(()->new EntityNotFoundException("Doesn't Exist"));
+        Set<Long> foodIds= dayPlan.getMeals().stream()
+            .flatMap(meal->meal.getFoodList().stream())
+            .map(mealFood->mealFood.getFood()==null?mealFood.getUsdaId():mealFood.getFood().getId())
+            .collect(Collectors.toSet());
+         Map<Long,FoodResponseDto> usdaFoodMap=foodService.findAllByUsdaId(foodIds).stream()
+            .collect(Collectors.toMap(FoodResponseDto::getId,fr->fr));
+
+        Map<Long,FoodResponseDto> foodMap= foodService.findAllById(foodIds).stream()
+            .map(food->FoodMapper.toResponseDto(food))
+            .collect(Collectors.toMap(FoodResponseDto::getId, fr->fr));
+
+        DayPlanDetailedResponseDto detailedResponse= DayPlanMapper.toDetailedResponseDto(dayPlan);
+        detailedResponse.getMeals().stream()
+        .forEach(mealInPlanResponse->{
+            HashSet<FoodResponseDto> foods= new HashSet<>();
+            for (FoodResponseDto fr : mealInPlanResponse.getMealFoods()) {
+                if(foodMap.containsKey(fr.getId())) foods.add(foodMap.get(fr.getId()));
+                else if (usdaFoodMap.containsKey(fr.getId()))foods.add(usdaFoodMap.get(fr.getId()));
+            }
+            mealInPlanResponse.setMealFoods(foods);
+        });
+
+        return detailedResponse;
     }
 
     @Transactional
@@ -133,7 +157,8 @@ public class DayPlanService {
         .forEach(mealInPlanResponse->{
             HashSet<FoodResponseDto> foods= new HashSet<>();
             for (FoodResponseDto fr : mealInPlanResponse.getMealFoods()) {
-                foods.add(usdaFoodMap.get(fr.getId()));
+                if(foodMap.containsKey(fr.getId())) foods.add(FoodMapper.toResponseDto(foodMap.get(fr.getId())));
+                else if (usdaFoodMap.containsKey(fr.getId()))foods.add(usdaFoodMap.get(fr.getId()));
             }
             mealInPlanResponse.setMealFoods(foods);
         });
