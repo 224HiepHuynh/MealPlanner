@@ -90,11 +90,10 @@ public class DayPlanService {
         Map<Long, Food> foodMap = foodService.findAllById(allFoodIds).stream()
             .collect(Collectors.toMap(Food::getId, f->f));
         
-        Set<Long> usdaFoodIds=foodService.findAllByUsdaId(allFoodIds).stream()
-            .map(FoodResponseDto::getId)
-            .collect(Collectors.toSet());
+        Map<Long,FoodResponseDto> usdaFoodMap=foodService.findAllByUsdaId(allFoodIds).stream()
+            .collect(Collectors.toMap(FoodResponseDto::getId,fr->fr));
         
-        if(foodMap.size()+usdaFoodIds.size()!=allFoodIds.size()){throw new Exception("Some Foods don't exist");}
+        if(foodMap.size()+usdaFoodMap.size()!=allFoodIds.size()){throw new Exception("Some Foods don't exist");}
 
 
         Map<MealRequestDto,Meal> mealMap= 
@@ -115,7 +114,7 @@ public class DayPlanService {
                     .grams(foodRequest.getAmount())
                     .build();
                 }
-                else if(usdaFoodIds.contains(key)){
+                else if(usdaFoodMap.containsKey(key)){
                     mf= MealFood.builder()
                     .meal(meal)
                     .food(null)
@@ -129,7 +128,16 @@ public class DayPlanService {
         
         dp.setMeals(new HashSet<>(mealMap.values()));
         DayPlan savedDayPlan= dayPlanRepository.save(dp);
-        return DayPlanMapper.toDetailedResponseDto(savedDayPlan);
+        DayPlanDetailedResponseDto detailedResponse=DayPlanMapper.toDetailedResponseDto(savedDayPlan);
+        detailedResponse.getMeals().stream()
+        .forEach(mealInPlanResponse->{
+            HashSet<FoodResponseDto> foods= new HashSet<>();
+            for (FoodResponseDto fr : mealInPlanResponse.getMealFoods()) {
+                foods.add(usdaFoodMap.get(fr.getId()));
+            }
+            mealInPlanResponse.setMealFoods(foods);
+        });
+        return detailedResponse;
 
     }
 
